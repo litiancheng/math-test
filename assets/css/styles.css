@@ -1,0 +1,171 @@
+/* 添加主题相关的CSS变量 */
+:root {
+    --primary-color: #007bff;
+    --spacing: 12px;
+
+    /* 亮色主题变量 */
+    --background-color: #f0f0f0;
+    --container-bg: white;
+    --text-color: #333;
+    --border-color: #ccc;
+    --hover-color: #e0e0e0;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+/* 暗色主题变量 */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background-color: #333;
+        --container-bg: #2d2d2d;
+        --text-color: #fff;
+        --border-color: #555;
+        --hover-color: #444;
+        --shadow-color: rgba(0, 0, 0, 0.3);
+    }
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* 更新现有样式使用新变量 */
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--spacing);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s;
+    /* 添加过渡效果 */
+}
+
+.container,
+.result-container {
+    background: var(--container-bg);
+    border-radius: 8px;
+    width: 100%;
+    max-width: 600px;
+    padding: var(--spacing);
+    box-shadow: 0 2px 4px var(--shadow-color);
+}
+
+input,
+select {
+    background-color: var(--container-bg);
+    color: var(--text-color);
+    border-color: var(--border-color);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: var(--spacing);
+}
+
+.form-group label {
+    margin-bottom: 6px;
+    font-weight: 500;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    /* 添加这行确保padding不会使元素超出设定宽度 */
+}
+
+.generate-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin: var(--spacing) 0;
+}
+
+.generate-btn:hover {
+    background-color: #0056b3;
+}
+
+.back-button {
+    display: inline-block;
+    padding: 8px 16px;
+    margin: 10px;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    text-decoration: none;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+    transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+    background-color: var(--hover-color);
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    height: 100vh;
+    padding: 1rem;
+}
+
+.menu-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 200px;
+    background-color: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 1.5rem;
+    transition: transform 0.3s ease;
+}
+
+.menu-button:hover {
+    transform: scale(1.05);
+    background-color: var(--hover-color);
+}
+
+/* 移动设备适配 */
+@media (max-width: 480px) {
+    html {
+        font-size: 14px;
+    }
+
+    .container,
+    .result-container {
+        padding: 10px;
+    }
+
+    input,
+    select,
+    button {
+        padding: 10px;
+    }
+
+    #display ul {
+        padding-left: 20px;
+    }
+
+    #display li {
+        margin-bottom: 8px;
+    }
+}
