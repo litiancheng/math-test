@@ -14,19 +14,11 @@
     <link rel="stylesheet" href="./assets/css/styles.css">
 
     <!-- 动态设置 base href -->
-    <script>
-        (function () {
-            var base = document.createElement('base');
-            // 判断是否在 GitHub Pages 上运行
-            var isGitHubPages = window.location.hostname === "litiancheng.github.io" && window.location.pathname.startsWith("/math-test/");
-
-            if (isGitHubPages) {
-                base.href = "/math-test/";
-            } else {
-                base.href = "/";
-            }
-            document.head.appendChild(base);
-        })();
+    <script type="module">
+        import { getBaseUrl } from './assets/js/config.js';
+        const base = document.createElement('base');
+        base.href = getBaseUrl();
+        document.head.appendChild(base);
     </script>
 </head>
 
