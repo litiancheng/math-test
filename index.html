@@ -4,25 +4,46 @@
 
 <head>
     <!-- 添加仓库名称作为基础路径 -->
-    <base href="/math-test/">
+    <!--base href="/math-test/"-->
     <meta charset="UTF-8">
     <meta name="color-scheme" content="light dark">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self';">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>数学题生成器</title>
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="./assets/css/styles.css">
+
+    <!-- 动态设置 base href -->
+    <script>
+        (function () {
+            var base = document.createElement('base');
+            // 判断是否在 GitHub Pages 上运行
+            var isGitHubPages = window.location.hostname === "litiancheng.github.io" && window.location.pathname.startsWith("/math-test/");
+
+            if (isGitHubPages) {
+                base.href = "/math-test/";
+            } else {
+                base.href = "/";
+            }
+            document.head.appendChild(base);
+        })();
+    </script>
 </head>
 
 <body>
     <div class="button-container">
-        <a href="pages/add.html" class="menu-button">
+        <a href="./pages/add.html" class="menu-button">
             <span>加减法试题</span>
         </a>
-        <a href="pages/multiply.html" class="menu-button">
+        <a href="./pages/multiply.html" class="menu-button">
             <span>乘法试题</span>
         </a>
     </div>
+
+    <footer class="footer">
+        <p>Copyright © 2024 litiancheng. 基于 <a href="https://github.com/litiancheng/math-test/blob/main/LICENSE"
+                target="_blank">MIT 许可证</a> 发布</p>
+    </footer>
 </body>
 
 </html>
