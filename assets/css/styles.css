@@ -10,6 +10,9 @@
     --border-color: #ccc;
     --hover-color: #e0e0e0;
     --shadow-color: rgba(0, 0, 0, 0.1);
+    --footer-bg: rgba(255, 255, 255, 0.8);
+    --footer-text: #666;
+    --footer-link: #0366d6;
 }
 
 /* 暗色主题变量 */
@@ -21,6 +24,9 @@
         --border-color: #555;
         --hover-color: #444;
         --shadow-color: rgba(0, 0, 0, 0.3);
+        --footer-bg: rgba(30, 30, 30, 0.8);
+        --footer-text: #999;
+        --footer-link: #58a6ff;
     }
 }
 
@@ -142,6 +148,30 @@ select {
 .menu-button:hover {
     transform: scale(1.05);
     background-color: var(--hover-color);
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    font-size: 0.8rem;
+    background-color: var(--footer-bg);
+    color: var(--footer-text);
+    backdrop-filter: blur(5px);
+    border-top: 1px solid rgba(128, 128, 128, 0.2);
+}
+
+.footer a {
+    color: var(--footer-link);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+    opacity: 0.8;
 }
 
 /* 移动设备适配 */
