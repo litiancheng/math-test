@@ -4,25 +4,46 @@
 
 <head>
     <!-- 添加仓库名称作为基础路径 -->
-    <base href="/math-test/">
+    <!--base href="/math-test/"-->
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="./assets/images/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="./assets/images/favicon.svg" />
+    <link rel="shortcut icon" href="./assets/images/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/images/apple-touch-icon.png" />
+    <link rel="manifest" href="./assets/images/site.webmanifest" />
+
     <meta charset="UTF-8">
     <meta name="color-scheme" content="light dark">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self';">
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'self'; 
+        script-src 'self'; 
+        style-src 'self';
+        connect-src 'self' ws://127.0.0.1:* ws://localhost:*;
+    ">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>数学题生成器</title>
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="./assets/css/styles.css">
+
+    <!-- 使用外部脚本 -->
+    <script type="module" src="./assets/js/init.js"></script>
 </head>
 
 <body>
     <div class="button-container">
-        <a href="pages/add.html" class="menu-button">
+        <a href="./pages/add.html" class="menu-button">
             <span>加减法试题</span>
         </a>
-        <a href="pages/multiply.html" class="menu-button">
+        <a href="./pages/multiply.html" class="menu-button">
             <span>乘法试题</span>
         </a>
     </div>
+
+    <footer class="footer">
+        <p>Copyright © 2024 litiancheng. 基于 <a href="https://github.com/litiancheng/math-test/blob/main/LICENSE"
+                target="_blank">MIT 许可证</a> 发布</p>
+    </footer>
 </body>
 
 </html>
