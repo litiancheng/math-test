@@ -225,7 +225,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         num2 = Math.floor(Math.random() * 100);
                         num3 = Math.floor(Math.random() * 100);
                     } while (((num1 + num2 - num3) >= 100)
-                    || (num1 + num2 - num3 < 0)
+                    || (num2 - num3 < 0)
                     || ((num2 % 10 - num3 % 10) >= 0)
                         || (((num2 - num3) % 10 + num1 % 10) < 10));
                     threeNumProblems.push(`${num1} + (${num2} - ${num3}) = `);
@@ -235,7 +235,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         num1 = Math.floor(Math.random() * 100);
                         num2 = Math.floor(Math.random() * 100);
                         num3 = Math.floor(Math.random() * 100);
-                    } while (((num1 + num2 - num3) >= 100)
+                    } while ((num1 + num2 >= 100)
                     || (num1 + num2 - num3 < 0)
                     || ((num1 % 10 + num2 % 10) < 10)
                         || ((num1 + num2) % 10 - num3 % 10) >= 0);
@@ -249,6 +249,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         num2 = Math.floor(Math.random() * 100);
                         num3 = Math.floor(Math.random() * 100);
                     } while ((num1 - num2 - num3 >= 100)
+                    || (num2 + num3 >= 100)
                     || (num1 - num2 - num3 < 0)
                     || ((num2 % 10 + num3 % 10) < 10)
                         || (num1 % 10 - (num2 + num3) % 10 >= 0));
@@ -260,7 +261,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         num2 = Math.floor(Math.random() * 100);
                         num3 = Math.floor(Math.random() * 100);
                     } while ((num1 - num2 + num3 >= 100)
-                    || (num1 - num2 + num3 < 0)
+                    || (num1 - num2 < 0)
                     || ((num1 % 10 - num2 % 10) >= 0)
                         || ((num1 - num2) % 10 + num3 % 10 < 10));
                     threeNumProblems.push(`${num1} - ${num2} + ${num3} = `);
@@ -273,6 +274,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         num2 = Math.floor(Math.random() * 100);
                         num3 = Math.floor(Math.random() * 100);
                     } while ((num1 - num2 + num3 >= 100)
+                    || (num2 - num3 < 0)
                     || (num1 - num2 + num3 < 0)
                     || ((num2 % 10 - num3 % 10) >= 0)
                         || ((num1 % 10 - (num2 - num3) % 10) >= 0));
@@ -360,23 +362,25 @@ document.addEventListener('DOMContentLoaded', function () {
         return array;
     }
 
-    const addButton = document.getElementById('generateAddButton');
-    const multiplyButton = document.getElementById('generateMultiplyButton');
+    document.addEventListener('DOMContentLoaded', function () {
+        const addButton = document.getElementById('generateAddButton');
+        const multiplyButton = document.getElementById('generateMultiplyButton');
 
-    // 添加错误处理
-    try {
-        if (addButton) {
-            addButton.addEventListener('click', displayAddNumber);
-        } else {
-            console.warn('加法按钮元素未找到');
-        }
+        // 添加错误处理
+        try {
+            if (addButton) {
+                addButton.addEventListener('click', displayAddNumber);
+            } else {
+                console.warn('加法按钮元素未找到');
+            }
 
-        if (multiplyButton) {
-            multiplyButton.addEventListener('click', displayMultiplyNumber);
-        } else {
-            console.warn('乘法按钮元素未找到');
+            if (multiplyButton) {
+                multiplyButton.addEventListener('click', displayMultiplyNumber);
+            } else {
+                console.warn('乘法按钮元素未找到');
+            }
+        } catch (error) {
+            console.error('添加事件监听器时发生错误:', error);
         }
-    } catch (error) {
-        console.error('添加事件监听器时发生错误:', error);
-    }
+    });
 });
