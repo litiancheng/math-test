@@ -362,25 +362,20 @@ document.addEventListener('DOMContentLoaded', function () {
         return array;
     }
 
-    document.addEventListener('DOMContentLoaded', function () {
-        const addButton = document.getElementById('generateAddButton');
-        const multiplyButton = document.getElementById('generateMultiplyButton');
+    const addButton = document.getElementById('generateAddButton');
+    const multiplyButton = document.getElementById('generateMultiplyButton');
 
-        // 添加错误处理
-        try {
-            if (addButton) {
-                addButton.addEventListener('click', displayAddNumber);
-            } else {
-                console.warn('加法按钮元素未找到');
-            }
-
-            if (multiplyButton) {
-                multiplyButton.addEventListener('click', displayMultiplyNumber);
-            } else {
-                console.warn('乘法按钮元素未找到');
-            }
-        } catch (error) {
-            console.error('添加事件监听器时发生错误:', error);
+    // 添加错误处理
+    try {
+        if (addButton) {
+            addButton.addEventListener('click', displayAddNumber);
         }
-    });
+
+        if (multiplyButton) {
+            multiplyButton.addEventListener('click', displayMultiplyNumber);
+        }
+
+    } catch (error) {
+        console.error('添加事件监听器时发生错误:', error);
+    }
 });

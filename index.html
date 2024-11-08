@@ -20,11 +20,11 @@
         default-src 'self'; 
         script-src 'self'; 
         style-src 'self';
-        connect-src 'self' ws://127.0.0.1:* ws://localhost:*;
+        connect-src 'self' ws://127.0.0.1:* ws://localhost:* wss://127.0.0.1:* wss://localhost:*;
     ">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>数学题生成器</title>
-    <link rel="stylesheet" href="./assets/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="./assets/css/styles.css">
 
     <!-- 使用外部脚本 -->
     <script type="module" src="./assets/js/init.js"></script>
