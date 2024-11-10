@@ -1,6 +1,6 @@
-document.addEventListener('DOMContentLoaded', function () {
-    'use strict';
+'use strict';
 
+document.addEventListener('DOMContentLoaded', function () {
     // 添加到 DOMContentLoaded 事件开始处
     function setThemeBasedOnSystem() {
         if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
