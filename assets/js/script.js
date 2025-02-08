@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function () {
         p.appendChild(br3);
         p.appendChild(document.createTextNode(`3个数试题中加括号的比例: ${threeNumberParenthesesRatio}`));
         p.appendChild(br4);
-        p.appendChild(document.createTextNode(`加法试题比例: ${additionRatio}`));
+        p.appendChild(document.createTextNode(`2个数试题中加法题比例: ${additionRatio}`));
 
         displayElement.appendChild(p);
 
@@ -130,11 +130,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // 创建换行元素
         const br1 = document.createElement('br');
+        const br2 = document.createElement('br');
 
         // 显示用户输入的参数
         p.textContent = `试题数目: ${number}`;
         p.appendChild(br1);
         p.appendChild(document.createTextNode(`乘法和加减法混合试题的比例: ${multiplyPlusAddRatio}`));
+        p.appendChild(br2);
+        p.appendChild(document.createTextNode(`混合试题种加法试题的比例: ${addRatio}`))
 
         displayElement.appendChild(p);
 
