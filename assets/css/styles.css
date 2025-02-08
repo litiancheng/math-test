@@ -30,6 +30,11 @@
     }
 }
 
+/* 添加全局 box-sizing 设置 */
+* {
+    box-sizing: border-box;
+}
+
 html,
 body {
     height: 100%;
@@ -39,16 +44,18 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
-/* 更新现有样式使用新变量 */
 body {
     display: flex;
     flex-direction: column;
+    min-height: 100vh;
+    /* 确保body至少占满视口高度 */
+    margin: 0;
     align-items: center;
-    padding: var(--spacing);
-    background-color: var(--bg-color);
+    padding: var(--spacing) var(--spacing) var(--spacing) var(--spacing);
+    background-color: var(--background-color);
+    /* 注意变量名称需与定义一致 */
     color: var(--text-color);
     transition: background-color 0.3s, color 0.3s;
-    /* 添加过渡效果 */
 }
 
 .container,
@@ -127,8 +134,10 @@ select {
     justify-content: center;
     align-items: center;
     gap: 2rem;
-    height: 100vh;
+    flex: 1;
     padding: 1rem;
+    /* 移除 margin-bottom 或使用合适数值 */
+    margin-bottom: 0;
 }
 
 .menu-button {
