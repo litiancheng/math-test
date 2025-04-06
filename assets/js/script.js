@@ -544,7 +544,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 let num1, num2, num3;
                 if (braOps) {
                     do {
-                        Math.floor(Math.random() * (MAX_MULTIPLIER - 1)) + MIN_MULTIPLIER;
+                        num1 = Math.floor(Math.random() * (MAX_MULTIPLIER - 1)) + MIN_MULTIPLIER;
                         num2 = Math.floor(Math.random() * 9) + 1;
                         num3 = Math.floor(Math.random() * 9) + 1;
                     } while ((num2 - num3 <= 0)
@@ -559,8 +559,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 } else {
                     if (Math.random() < 0.5) {
                         do {
-                            Math.floor(Math.random() * (MAX_MULTIPLIER - 1)) + MIN_MULTIPLIER;
-                            Math.floor(Math.random() * (MAX_MULTIPLIER - 1)) + MIN_MULTIPLIER;
+                            num1 = Math.floor(Math.random() * (MAX_MULTIPLIER - 1)) + MIN_MULTIPLIER;
+                            num2 = Math.floor(Math.random() * (MAX_MULTIPLIER - 1)) + MIN_MULTIPLIER;
                             num3 = Math.floor(Math.random() * maxValue);
                         } while ((num1 * num2 > maxValue)
                         || (num1 * num2 - num3 <= 0)
@@ -569,8 +569,8 @@ document.addEventListener('DOMContentLoaded', function () {
                         ProblemsWithAnswer.push(`${num1} ${MULTIPLY_SYMBOL} ${num2} ${SUBTRACT_SYMBOL} ${num3} = ${num1 * num2 - num3}`);
                     } else {
                         do {
-                            Math.floor(Math.random() * (MAX_MULTIPLIER - 1)) + MIN_MULTIPLIER;
-                            Math.floor(Math.random() * (MAX_MULTIPLIER - 1)) + MIN_MULTIPLIER;
+                            num1 = Math.floor(Math.random() * (MAX_MULTIPLIER - 1)) + MIN_MULTIPLIER;
+                            num2 = Math.floor(Math.random() * (MAX_MULTIPLIER - 1)) + MIN_MULTIPLIER;
                             num3 = Math.floor(Math.random() * maxValue);
                         } while ((num1 * num2 > maxValue)
                         || (num3 - num1 * num2 <= 0)
@@ -585,7 +585,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (braOps) {
                     if (Math.random() < 0.5) {
                         do {
-                            Math.floor(Math.random() * (MAX_MULTIPLIER - 1)) + MIN_MULTIPLIER;
+                            num1 = Math.floor(Math.random() * (MAX_MULTIPLIER - 1)) + MIN_MULTIPLIER;
                             num2 = Math.floor(Math.random() * maxValue);
                             num3 = Math.floor(Math.random() * maxValue);
                         } while ((num2 - num3 > 10)
@@ -595,7 +595,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         ProblemsWithAnswer.push(`${num1 * (num2 - num3)} ${DIVIDE_SYMBOL} (${num2} ${SUBTRACT_SYMBOL} ${num3}) = ${num1}`);
                     } else {
                         do {
-                            Math.floor(Math.random() * (MAX_MULTIPLIER - 1)) + MIN_MULTIPLIER;
+                            num1 = Math.floor(Math.random() * (MAX_MULTIPLIER - 1)) + MIN_MULTIPLIER;
                             num2 = Math.floor(Math.random() * maxValue);
                             num3 = Math.floor(Math.random() * maxValue);
                         } while ((num2 - num3 <= 0)
@@ -608,8 +608,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 } else {
                     if (Math.random() < 0.5) {
                         do {
-                            Math.floor(Math.random() * (MAX_MULTIPLIER - 1)) + MIN_MULTIPLIER;
-                            Math.floor(Math.random() * (MAX_MULTIPLIER - 1)) + MIN_MULTIPLIER;
+                            num1 = Math.floor(Math.random() * (MAX_MULTIPLIER - 1)) + MIN_MULTIPLIER;
+                            num2 = Math.floor(Math.random() * (MAX_MULTIPLIER - 1)) + MIN_MULTIPLIER;
                             num3 = Math.floor(Math.random() * maxValue);
                         } while ((num1 * num2 > maxValue)
                         || (num1 - num3 <= 0)
@@ -619,8 +619,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
                     else {
                         do {
-                            Math.floor(Math.random() * (MAX_MULTIPLIER - 1)) + MIN_MULTIPLIER;
-                            Math.floor(Math.random() * (MAX_MULTIPLIER - 1)) + MIN_MULTIPLIER;
+                            num1 = Math.floor(Math.random() * (MAX_MULTIPLIER - 1)) + MIN_MULTIPLIER;
+                            num2 = Math.floor(Math.random() * (MAX_MULTIPLIER - 1)) + MIN_MULTIPLIER;
                             num3 = Math.floor(Math.random() * maxValue);
                         } while ((num1 * num2 > maxValue)
                         || (num3 - num1 <= 0)
@@ -634,9 +634,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 let num1, num2, num3;
                 if (braOps) {
                     do {
-                        Math.floor(Math.random() * (MAX_MULTIPLIER - 1)) + MIN_MULTIPLIER;
-                        Math.floor(Math.random() * (MAX_MULTIPLIER - 1)) + MIN_MULTIPLIER;
-                        Math.floor(Math.random() * (MAX_MULTIPLIER - 1)) + MIN_MULTIPLIER;
+                        num1 = Math.floor(Math.random() * (MAX_MULTIPLIER - 1)) + MIN_MULTIPLIER;
+                        num2 = Math.floor(Math.random() * (MAX_MULTIPLIER - 1)) + MIN_MULTIPLIER;
+                        num3 = Math.floor(Math.random() * (MAX_MULTIPLIER - 1)) + MIN_MULTIPLIER;
                     } while ((num2 * num3 > maxValue)
                         || (num1 * num2 > maxValue));
                     if (Math.random() < 0.5) {
@@ -648,9 +648,9 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
                 } else {
                     do {
-                        Math.floor(Math.random() * (MAX_MULTIPLIER - 1)) + MIN_MULTIPLIER;
-                        Math.floor(Math.random() * (MAX_MULTIPLIER - 1)) + MIN_MULTIPLIER;
-                        Math.floor(Math.random() * (MAX_MULTIPLIER - 1)) + MIN_MULTIPLIER;
+                        num1 = Math.floor(Math.random() * (MAX_MULTIPLIER - 1)) + MIN_MULTIPLIER;
+                        num2 = Math.floor(Math.random() * (MAX_MULTIPLIER - 1)) + MIN_MULTIPLIER;
+                        num3 = Math.floor(Math.random() * (MAX_MULTIPLIER - 1)) + MIN_MULTIPLIER;
                     } while ((num1 * num2 > maxValue)
                     || ((num1 * num2) % num3 !== 0)
                     || (num1 === num3)
