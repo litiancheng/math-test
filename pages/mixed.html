@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="color-scheme" content="light dark">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self'; 
+    script-src 'self'; 
+    style-src 'self';
+    connect-src 'self' ws://127.0.0.1:* ws://localhost:* wss://127.0.0.1:* wss://localhost:*;
+    ">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../assets/images/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg" />
+    <link rel="shortcut icon" href="../assets/images/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/apple-touch-icon.png" />
+    <link rel="manifest" href="../assets/images/site.webmanifest" />
+
+    <title>综合试题 - 小学口算题生成器</title>
+    <link rel="stylesheet" type="text/css" href="../assets/css/styles.css">
+
+    <!-- 使用外部脚本 -->
+    <script type="module" src="../assets/js/script.js"></script>
+</head>
+
+<body>
+    <!-- 返回按钮 -->
+    <a href="../index.html" class="back-button">返回</a>
+
+    <div class="container">
+        <div class="form-group">
+            <label for="NumProblems">试题数目:</label>
+            <input type="number" id="NumProblems" pattern="[0-9]*" inputmode="numeric" min="1" max="1000"
+                placeholder="输入试题数目" value="20">
+            <label for="maxValue">最大数值:</label>
+            <input type="number" id="maxValue" pattern="[0-9]*" inputmode="numeric" min="20" placeholder="输入试题数目"
+                value="99">
+        </div>
+        <div class="checkbox-group vertical">
+            <label><input type="checkbox" id="addOperation" checked> 加法</label>
+            <label><input type="checkbox" id="subtractOperation"> 减法</label>
+            <label><input type="checkbox" id="multiplyOperation"> 乘法</label>
+            <label><input type="checkbox" id="divideOperation"> 除法</label>
+            <label><input type="checkbox" id="bracketOperation"> 带括号</label>
+        </div>
+        <button id="generateMixedButton" class="generate-btn">生成试题</button>
+    </div>
+
+    <div id="display" class="result-container"></div>
+</body>
+
+</html>

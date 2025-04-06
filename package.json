@@ -9,5 +9,11 @@
     },
     "vitest": {
         "testEnvironment": "jsdom"
+    },
+    "pnpm": {
+        "onlyBuiltDependencies": [
+            "esbuild",
+            "msw"
+        ]
     }
 }

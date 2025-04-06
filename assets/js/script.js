@@ -365,8 +365,433 @@ document.addEventListener('DOMContentLoaded', function () {
         return array;
     }
 
+    // 生成加减乘除混合数学题目
+    function generateMixedProblems(NumProblems, maxValue, addOps, subOps, mulOps, divOps, braOps) {
+        const MULTIPLY_SYMBOL = "\u00D7"; // 或 '·' 或 '&times;'
+        const DIVIDE_SYMBOL = "\u00F7"; // 或 '/' 或 '&divide;'
+        const ADD_SYMBOL = "\u002B"; // 或 '&plus;'
+        const SUBTRACT_SYMBOL = "\u2212"; // 或 '&minus;'
+
+        const MIN_MULTIPLIER = 2;
+        const MAX_MULTIPLIER = 9;
+
+        // 对选中的运算符随机生成执行顺序
+        let Problems = [];
+        let ProblemsWithAnswer = [];
+        for (let i = 0; i < NumProblems; i++) {
+            if (addOps && !subOps && !mulOps && !divOps) {
+                // 仅加法题目
+                let num1, num2;
+                do {
+                    num1 = Math.floor(Math.random() * maxValue);
+                    num2 = Math.floor(Math.random() * maxValue);
+                } while (num1 + num2 > maxValue || (num1 % 10 + num2 % 10) < 10);
+                Problems.push(`${num1} ${ADD_SYMBOL} ${num2} = `);
+                ProblemsWithAnswer.push(`${num1} ${ADD_SYMBOL} ${num2} = ${num1 + num2}`);
+            } else if (!addOps && subOps && !mulOps && !divOps) {
+                // 仅减法题目
+                let num1, num2;
+                do {
+                    num1 = Math.floor(Math.random() * maxValue);
+                    num2 = Math.floor(Math.random() * maxValue);
+                } while (num1 - num2 <= 0 || (num1 % 10 - num2 % 10) >= 0);
+                Problems.push(`${num1} ${SUBTRACT_SYMBOL} ${num2} = `);
+                ProblemsWithAnswer.push(`${num1} ${SUBTRACT_SYMBOL} ${num2} = ${num1 - num2}`);
+            } else if (!addOps && !subOps && mulOps && !divOps) {
+                // 仅乘法题目
+                let num1, num2;
+                do {
+                    num1 = Math.floor(Math.random() * (MAX_MULTIPLIER - 1)) + MIN_MULTIPLIER;
+                    num2 = Math.floor(Math.random() * (MAX_MULTIPLIER - 1)) + MIN_MULTIPLIER;
+                } while (num1 * num2 > maxValue);
+                Problems.push(`${num1} ${MULTIPLY_SYMBOL} ${num2} = `);
+                ProblemsWithAnswer.push(`${num1} ${MULTIPLY_SYMBOL} ${num2} = ${num1 * num2}`);
+            } else if (!addOps && !subOps && !mulOps && divOps) {
+                // 仅除法题目
+                let num1, num2;
+                do {
+                    num1 = Math.floor(Math.random() * (MAX_MULTIPLIER - 1)) + MIN_MULTIPLIER;
+                    num2 = Math.floor(Math.random() * (MAX_MULTIPLIER - 1)) + MIN_MULTIPLIER;
+                } while (num1 * num2 > maxValue);
+                Problems.push(`${num1 * num2} ${DIVIDE_SYMBOL} ${num2} = `);
+                ProblemsWithAnswer.push(`${num1 * num2} ${DIVIDE_SYMBOL} ${num2} = ${num1}`);
+            } else if (addOps && subOps && !mulOps && !divOps) {
+                // 仅加减法题目
+                let num1, num2, num3;
+                if (Math.random() < 0.5) {
+                    if (braOps) {
+                        do {
+                            num1 = Math.floor(Math.random() * maxValue);
+                            num2 = Math.floor(Math.random() * maxValue);
+                            num3 = Math.floor(Math.random() * maxValue);
+                        } while (((num1 + num2 - num3) > maxValue)
+                        || (num2 - num3 < 0)
+                        || ((num2 % 10 - num3 % 10) >= 0)
+                            || (((num2 - num3) % 10 + num1 % 10) < 10));
+                        Problems.push(`${num1} ${ADD_SYMBOL} (${num2} ${SUBTRACT_SYMBOL} ${num3}) = `);
+                        ProblemsWithAnswer.push(`${num1} ${ADD_SYMBOL} (${num2} ${SUBTRACT_SYMBOL} ${num3}) = ${num1 + (num2 - num3)}`);
+                    } else {
+                        do {
+                            num1 = Math.floor(Math.random() * maxValue);
+                            num2 = Math.floor(Math.random() * maxValue);
+                            num3 = Math.floor(Math.random() * maxValue);
+                        } while ((num1 + num2 > maxValue)
+                        || (num1 + num2 - num3 < 0)
+                        || ((num1 % 10 + num2 % 10) < 10)
+                            || ((num1 + num2) % 10 - num3 % 10) >= 0);
+                        Problems.push(`${num1} ${ADD_SYMBOL} ${num2} ${SUBTRACT_SYMBOL} ${num3} = `);
+                        ProblemsWithAnswer.push(`${num1} ${ADD_SYMBOL} ${num2} ${SUBTRACT_SYMBOL} ${num3} = ${num1 + num2 - num3}`);
+                    }
+                } else {
+                    if (braOps) {
+                        do {
+                            num1 = Math.floor(Math.random() * maxValue);
+                            num2 = Math.floor(Math.random() * maxValue);
+                            num3 = Math.floor(Math.random() * maxValue);
+                        } while ((num2 + num3 > maxValue)
+                        || (num1 - num2 - num3 < 0)
+                        || ((num2 % 10 + num3 % 10) < 10)
+                            || (num1 % 10 - (num2 + num3) % 10 >= 0));
+                        Problems.push(`${num1} ${SUBTRACT_SYMBOL} (${num2} ${ADD_SYMBOL} ${num3}) = `);
+                        ProblemsWithAnswer.push(`${num1} ${SUBTRACT_SYMBOL} (${num2} ${ADD_SYMBOL} ${num3}) = ${num1 - (num2 + num3)}`);
+                    } else {
+                        do {
+                            num1 = Math.floor(Math.random() * maxValue);
+                            num2 = Math.floor(Math.random() * maxValue);
+                            num3 = Math.floor(Math.random() * maxValue);
+                        } while ((num1 - num2 + num3 > maxValue)
+                        || (num1 - num2 < 0)
+                        || ((num1 % 10 - num2 % 10) >= 0)
+                            || ((num1 - num2) % 10 + num3 % 10 < 10));
+                        Problems.push(`${num1} ${SUBTRACT_SYMBOL} ${num2} ${ADD_SYMBOL} ${num3} = `);
+                        ProblemsWithAnswer.push(`${num1} ${SUBTRACT_SYMBOL} ${num2} ${ADD_SYMBOL} ${num3} = ${num1 - num2 + num3}`);
+                    }
+                }
+            } else if (addOps && !subOps && mulOps && !divOps) {
+                // 仅加乘法题目
+                let num1, num2, num3;
+                if (braOps) {
+                    do {
+                        num1 = Math.floor(Math.random() * (MAX_MULTIPLIER - 1)) + MIN_MULTIPLIER;
+                        num2 = Math.floor(Math.random() * 9) + 1;
+                        num3 = Math.floor(Math.random() * 9) + 1;
+                    } while ((num2 + num3 > 10)
+                    || (num1 * (num2 + num3) > maxValue)
+                        || (num1 * (num2 + num3) < 10));
+                    if (Math.random() < 0.5) {
+                        Problems.push(`${num1} ${MULTIPLY_SYMBOL} (${num2} ${ADD_SYMBOL} ${num3}) = `);
+                        ProblemsWithAnswer.push(`${num1} ${MULTIPLY_SYMBOL} (${num2} ${ADD_SYMBOL} ${num3}) = ${num1 * (num2 + num3)}`);
+                    } else {
+                        Problems.push(`(${num2} ${ADD_SYMBOL} ${num3}) ${MULTIPLY_SYMBOL} ${num1} = `);
+                        ProblemsWithAnswer.push(`(${num2} ${ADD_SYMBOL} ${num3}) ${MULTIPLY_SYMBOL} ${num1} = ${num1 * (num2 + num3)}`);
+                    }
+                } else {
+                    do {
+                        num1 = Math.floor(Math.random() * (MAX_MULTIPLIER - 1)) + MIN_MULTIPLIER;
+                        num2 = Math.floor(Math.random() * (MAX_MULTIPLIER - 1)) + MIN_MULTIPLIER;
+                        num3 = Math.floor(Math.random() * maxValue);
+                    } while ((num1 * num2 + num3 > maxValue)
+                    || ((num1 * num2) % 10 + num3 % 10 < 10)
+                        || (num1 * num2 + num3 < 10));
+                    if (Math.random() < 0.5) {
+                        Problems.push(`${num1} ${MULTIPLY_SYMBOL} ${num2} ${ADD_SYMBOL} ${num3} = `);
+                        ProblemsWithAnswer.push(`${num1} ${MULTIPLY_SYMBOL} ${num2} ${ADD_SYMBOL} ${num3} = ${num1 * num2 + num3}`);
+                    } else {
+                        Problems.push(`${num3} ${ADD_SYMBOL} ${num1} ${MULTIPLY_SYMBOL} ${num2} = `);
+                        ProblemsWithAnswer.push(`${num3} ${ADD_SYMBOL} ${num1} ${MULTIPLY_SYMBOL} ${num2} = ${num1 * num2 + num3}`);
+                    }
+                }
+            } else if (addOps && !subOps && !mulOps && divOps) {
+                // 仅加除法题目
+                let num1, num2, num3;
+                if (braOps) {
+                    if (Math.random() < 0.5) {
+                        do {
+                            num1 = Math.floor(Math.random() * (MAX_MULTIPLIER - 1)) + MIN_MULTIPLIER;
+                            num2 = Math.floor(Math.random() * 9) + 1;
+                            num3 = Math.floor(Math.random() * 9) + 1;
+                        } while ((num2 + num3 > 10)
+                            || ((num2 + num3) % num1 !== 0));
+                        Problems.push(`(${num2} ${ADD_SYMBOL} ${num3}) ${DIVIDE_SYMBOL} ${num1} = `);
+                        ProblemsWithAnswer.push(`(${num2} ${ADD_SYMBOL} ${num3}) ${DIVIDE_SYMBOL} ${num1} = ${(num2 + num3) / num1}`);
+                    } else {
+                        do {
+                            num1 = Math.floor(Math.random() * (MAX_MULTIPLIER - 1)) + MIN_MULTIPLIER;
+                            num2 = Math.floor(Math.random() * 9) + 1;
+                            num3 = Math.floor(Math.random() * 9) + 1;
+                        } while ((num2 + num3 > 10)
+                            || (num1 * (num2 + num3) > maxValue));
+                        Problems.push(`${num1 * (num2 + num3)} ${DIVIDE_SYMBOL} (${num2} ${ADD_SYMBOL} ${num3}) = `);
+                        ProblemsWithAnswer.push(`${num1 * (num2 + num3)} ${DIVIDE_SYMBOL} (${num2} ${ADD_SYMBOL} ${num3}) = ${num1}`);
+                    }
+                } else {
+                    do {
+                        num1 = Math.floor(Math.random() * (MAX_MULTIPLIER - 1)) + MIN_MULTIPLIER;
+                        num2 = Math.floor(Math.random() * (MAX_MULTIPLIER - 1)) + MIN_MULTIPLIER;
+                        num3 = Math.floor(Math.random() * maxValue);
+                    } while ((num1 * num2 + num3 > maxValue)
+                        || (num1 % 10 + num3 % 10 <= 10));
+                    if (Math.random() < 0.5) {
+                        Problems.push(`${num1 * num2} ${DIVIDE_SYMBOL} ${num2} ${ADD_SYMBOL} ${num3} = `);
+                        ProblemsWithAnswer.push(`${num1 * num2} ${DIVIDE_SYMBOL} ${num2} ${ADD_SYMBOL} ${num3} = ${num1 + num3}`);
+                    } else {
+                        Problems.push(`${num3} ${ADD_SYMBOL} ${num1 * num2} ${DIVIDE_SYMBOL} ${num2} = `);
+                        ProblemsWithAnswer.push(`${num3} ${ADD_SYMBOL} ${num1 * num2} ${DIVIDE_SYMBOL} ${num2} = ${num1 + num3}`);
+                    }
+                }
+            } else if (!addOps && subOps && mulOps && !divOps) {
+                // 仅减乘法题目
+                let num1, num2, num3;
+                if (braOps) {
+                    do {
+                        Math.floor(Math.random() * (MAX_MULTIPLIER - 1)) + MIN_MULTIPLIER;
+                        num2 = Math.floor(Math.random() * 9) + 1;
+                        num3 = Math.floor(Math.random() * 9) + 1;
+                    } while ((num2 - num3 <= 0)
+                        || (num1 * (num2 - num3) > maxValue));
+                    if (Math.random() < 0.5) {
+                        Problems.push(`${num1} ${MULTIPLY_SYMBOL} (${num2} ${SUBTRACT_SYMBOL} ${num3}) = `);
+                        ProblemsWithAnswer.push(`${num1} ${MULTIPLY_SYMBOL} (${num2} ${SUBTRACT_SYMBOL} ${num3}) = ${num1 * (num2 - num3)}`);
+                    } else {
+                        Problems.push(`(${num2} ${SUBTRACT_SYMBOL} ${num3}) ${MULTIPLY_SYMBOL} ${num1} = `);
+                        ProblemsWithAnswer.push(`(${num2} ${SUBTRACT_SYMBOL} ${num3}) ${MULTIPLY_SYMBOL} ${num1} = ${num1 * (num2 - num3)}`);
+                    }
+                } else {
+                    if (Math.random() < 0.5) {
+                        do {
+                            Math.floor(Math.random() * (MAX_MULTIPLIER - 1)) + MIN_MULTIPLIER;
+                            Math.floor(Math.random() * (MAX_MULTIPLIER - 1)) + MIN_MULTIPLIER;
+                            num3 = Math.floor(Math.random() * maxValue);
+                        } while ((num1 * num2 > maxValue)
+                        || (num1 * num2 - num3 <= 0)
+                            || ((num1 * num2) % 10 > num3 % 10));
+                        Problems.push(`${num1} ${MULTIPLY_SYMBOL} ${num2} ${SUBTRACT_SYMBOL} ${num3} = `);
+                        ProblemsWithAnswer.push(`${num1} ${MULTIPLY_SYMBOL} ${num2} ${SUBTRACT_SYMBOL} ${num3} = ${num1 * num2 - num3}`);
+                    } else {
+                        do {
+                            Math.floor(Math.random() * (MAX_MULTIPLIER - 1)) + MIN_MULTIPLIER;
+                            Math.floor(Math.random() * (MAX_MULTIPLIER - 1)) + MIN_MULTIPLIER;
+                            num3 = Math.floor(Math.random() * maxValue);
+                        } while ((num1 * num2 > maxValue)
+                        || (num3 - num1 * num2 <= 0)
+                            || ((num1 * num2) % 10 < num3 % 10));
+                        Problems.push(`${num3} ${SUBTRACT_SYMBOL} ${num1} ${MULTIPLY_SYMBOL} ${num2} = `);
+                        ProblemsWithAnswer.push(`${num3} ${SUBTRACT_SYMBOL} ${num1} ${MULTIPLY_SYMBOL} ${num2} = ${num3 - num1 * num2}`);
+                    }
+                }
+            } else if (!addOps && subOps && !mulOps && divOps) {
+                // 仅减除法题目
+                let num1, num2, num3;
+                if (braOps) {
+                    if (Math.random() < 0.5) {
+                        do {
+                            Math.floor(Math.random() * (MAX_MULTIPLIER - 1)) + MIN_MULTIPLIER;
+                            num2 = Math.floor(Math.random() * maxValue);
+                            num3 = Math.floor(Math.random() * maxValue);
+                        } while ((num2 - num3 > 10)
+                        || (num2 - num3 <= 0)
+                            || (num1 * (num2 - num3) > maxValue));
+                        Problems.push(`${num1 * (num2 - num3)} ${DIVIDE_SYMBOL} (${num2} ${SUBTRACT_SYMBOL} ${num3}) = `);
+                        ProblemsWithAnswer.push(`${num1 * (num2 - num3)} ${DIVIDE_SYMBOL} (${num2} ${SUBTRACT_SYMBOL} ${num3}) = ${num1}`);
+                    } else {
+                        do {
+                            Math.floor(Math.random() * (MAX_MULTIPLIER - 1)) + MIN_MULTIPLIER;
+                            num2 = Math.floor(Math.random() * maxValue);
+                            num3 = Math.floor(Math.random() * maxValue);
+                        } while ((num2 - num3 <= 0)
+                        || ((num2 - num3) % num1 !== 0)
+                        || ((num2 - num3) / num1 >= 10)
+                            || (num2 - num3 === num1));
+                        Problems.push(`(${num2} ${SUBTRACT_SYMBOL} ${num3}) ${DIVIDE_SYMBOL} ${num1} = `);
+                        ProblemsWithAnswer.push(`(${num2} ${SUBTRACT_SYMBOL} ${num3}) ${DIVIDE_SYMBOL} ${num1} = ${(num2 - num3) / num1}`);
+                    }
+                } else {
+                    if (Math.random() < 0.5) {
+                        do {
+                            Math.floor(Math.random() * (MAX_MULTIPLIER - 1)) + MIN_MULTIPLIER;
+                            Math.floor(Math.random() * (MAX_MULTIPLIER - 1)) + MIN_MULTIPLIER;
+                            num3 = Math.floor(Math.random() * maxValue);
+                        } while ((num1 * num2 > maxValue)
+                        || (num1 - num3 <= 0)
+                            || (num3 === 0));
+                        Problems.push(`${num1 * num2} ${DIVIDE_SYMBOL} ${num2} ${SUBTRACT_SYMBOL} ${num3} = `);
+                        ProblemsWithAnswer.push(`${num1 * num2} ${DIVIDE_SYMBOL} ${num2} ${SUBTRACT_SYMBOL} ${num3} = ${num1 - num3}`);
+                    }
+                    else {
+                        do {
+                            Math.floor(Math.random() * (MAX_MULTIPLIER - 1)) + MIN_MULTIPLIER;
+                            Math.floor(Math.random() * (MAX_MULTIPLIER - 1)) + MIN_MULTIPLIER;
+                            num3 = Math.floor(Math.random() * maxValue);
+                        } while ((num1 * num2 > maxValue)
+                        || (num3 - num1 <= 0)
+                            || (num3 % 10 - num1 % 10 >= 0));
+                        Problems.push(`${num3} ${SUBTRACT_SYMBOL} ${num1 * num2} ${DIVIDE_SYMBOL} ${num2} = `);
+                        ProblemsWithAnswer.push(`${num3} ${SUBTRACT_SYMBOL} ${num1 * num2} ${DIVIDE_SYMBOL} ${num2} = ${num3 - num1}`);
+                    }
+                }
+            } else if (!addOps && !subOps && mulOps && divOps) {
+                // 仅乘除法题目
+                let num1, num2, num3;
+                if (braOps) {
+                    do {
+                        Math.floor(Math.random() * (MAX_MULTIPLIER - 1)) + MIN_MULTIPLIER;
+                        Math.floor(Math.random() * (MAX_MULTIPLIER - 1)) + MIN_MULTIPLIER;
+                        Math.floor(Math.random() * (MAX_MULTIPLIER - 1)) + MIN_MULTIPLIER;
+                    } while ((num2 * num3 > maxValue)
+                        || (num1 * num2 > maxValue));
+                    if (Math.random() < 0.5) {
+                        Problems.push(`${num1} ${MULTIPLY_SYMBOL} (${num2 * num3} ${DIVIDE_SYMBOL} ${num3}) = `);
+                        ProblemsWithAnswer.push(`${num1} ${MULTIPLY_SYMBOL} (${num2 * num3} ${DIVIDE_SYMBOL} ${num3}) = ${num1 * num2}`);
+                    } else {
+                        Problems.push(`(${num2 * num3} ${DIVIDE_SYMBOL} ${num3}) ${MULTIPLY_SYMBOL} ${num1} = `);
+                        ProblemsWithAnswer.push(`(${num2 * num3} ${DIVIDE_SYMBOL} ${num3}) ${MULTIPLY_SYMBOL} ${num1} = ${num1 * num2}`);
+                    }
+                } else {
+                    do {
+                        Math.floor(Math.random() * (MAX_MULTIPLIER - 1)) + MIN_MULTIPLIER;
+                        Math.floor(Math.random() * (MAX_MULTIPLIER - 1)) + MIN_MULTIPLIER;
+                        Math.floor(Math.random() * (MAX_MULTIPLIER - 1)) + MIN_MULTIPLIER;
+                    } while ((num1 * num2 > maxValue)
+                    || ((num1 * num2) % num3 !== 0)
+                    || (num1 === num3)
+                        || (num2 === num3));
+                    if (Math.random() < 0.5) {
+                        Problems.push(`${num1} ${MULTIPLY_SYMBOL} ${num2} ${DIVIDE_SYMBOL} ${num3} = `);
+                        ProblemsWithAnswer.push(`${num1} ${MULTIPLY_SYMBOL} ${num2} ${DIVIDE_SYMBOL} ${num3} = ${num1 * num2 / num3}`);
+                    } else {
+                        Problems.push(`${num2} ${DIVIDE_SYMBOL} ${num3} ${MULTIPLY_SYMBOL} ${num1} = `);
+                        ProblemsWithAnswer.push(`${num2} ${DIVIDE_SYMBOL} ${num3} ${MULTIPLY_SYMBOL} ${num1} = ${num1 * num2 / num3}`);
+                    }
+                }
+            }
+        }
+
+        return {
+            problems: Problems,
+            problemsWithAnswer: ProblemsWithAnswer
+        };
+    }
+
+    // 显示生成的数学题目
+    function displayMixedNumber() {
+        // 获取用户输入的参数
+        const addOps = document.getElementById('addOperation').checked;
+        const subOps = document.getElementById('subtractOperation').checked;
+        const mulOps = document.getElementById('multiplyOperation').checked;
+        const divOps = document.getElementById('divideOperation').checked;
+        const braOps = document.getElementById('bracketOperation').checked;
+        const inputNumProblems = document.getElementById('NumProblems').value;
+        const inputMaxValue = document.getElementById('maxValue').value;
+        const NumProblems = parseInt(inputNumProblems, 10);
+        const maxValue = parseInt(inputMaxValue, 10);
+
+        // 输入验证
+        if (!/^\d+$/.test(inputNumProblems)) {
+            document.getElementById('display').textContent = '试题数目：请输入1 ~ 1000的正整数';
+            return;
+        }
+
+        if (!/^\d+$/.test(inputMaxValue)) {
+            document.getElementById('display').textContent = '试题数目：请输入大于等于20的正整数';
+            return;
+        }
+
+        if (NumProblems > 1000) {
+            document.getElementById('display').textContent = '试题数目：为了保证性能，试题数目不能超过1000';
+            return;
+        }
+
+        if (isNaN(NumProblems) || NumProblems <= 0) {
+            document.getElementById('display').textContent = '试题数目：输入的试题数目要大于0';
+            return;
+        }
+
+        if (isNaN(maxValue) || maxValue < 20) {
+            document.getElementById('display').textContent = '最大数值：计算的最大数值要大于等于20';
+            return;
+        }
+
+        if (!addOps && !subOps && !mulOps && !divOps) {
+            document.getElementById('display').textContent = '加减乘除运算至少要选择1个';
+            return;
+        }
+
+        let opsCounter = 0;
+        if (addOps) opsCounter++;
+        if (subOps) opsCounter++;
+        if (mulOps) opsCounter++;
+        if (divOps) opsCounter++;
+        if (opsCounter > 2) {
+            document.getElementById('display').textContent = '加减乘除运算最多只能选择2个';
+            return;
+        }
+
+        // 清空并准备显示区域
+        const displayElement = document.getElementById('display');
+        displayElement.textContent = '';
+        const p = document.createElement('p');
+
+        // 创建换行元素
+        const br1 = document.createElement('br');
+        const br2 = document.createElement('br');
+        const br3 = document.createElement('br');
+        const br4 = document.createElement('br');
+        const br5 = document.createElement('br');
+        const br6 = document.createElement('br');
+        const br7 = document.createElement('br');
+        const br8 = document.createElement('br');
+
+        // 显示用户输入的参数
+        p.textContent = `试题数目: ${NumProblems}`;
+        p.appendChild(br1);
+        p.appendChild(document.createTextNode(`最大数值: ${maxValue}`));
+        p.appendChild(br2);
+        p.appendChild(document.createTextNode(`加法试题: ${addOps ? '选中' : '未选中'}`));
+        p.appendChild(br3);
+        p.appendChild(document.createTextNode(`减法试题: ${subOps ? '选中' : '未选中'}`));
+        p.appendChild(br4);
+        p.appendChild(document.createTextNode(`乘法试题: ${mulOps ? '选中' : '未选中'}`));
+        p.appendChild(br5);
+        p.appendChild(document.createTextNode(`除法试题: ${divOps ? '选中' : '未选中'}`));
+        p.appendChild(br6);
+        p.appendChild(document.createTextNode(`试题带括号: ${braOps ? '选中' : '未选中'}`));
+        p.appendChild(br7);
+        p.appendChild(document.createTextNode(`试题：`));
+
+        displayElement.appendChild(p);
+
+        // 生成并显示数学题目
+        const { problems, problemsWithAnswer } = generateMixedProblems(NumProblems, maxValue, addOps, subOps, mulOps, divOps, braOps);
+
+        const ul = document.createElement('ul');
+        problems.forEach(problem => {
+            const li = document.createElement('li');
+            li.textContent = problem;
+            ul.appendChild(li);
+        });
+        displayElement.appendChild(ul);
+
+        // 空一行
+        displayElement.appendChild(document.createElement('br'));
+
+        // 输出试题答案标题
+        const answerTitle = document.createElement('p');
+        answerTitle.textContent = '试题答案：';
+        displayElement.appendChild(answerTitle);
+
+        // 输出试题答案列表
+        const ulAnswers = document.createElement('ul');
+        problemsWithAnswer.forEach(answer => {
+            const li = document.createElement('li');
+            li.textContent = answer;
+            ulAnswers.appendChild(li);
+        });
+        displayElement.appendChild(ulAnswers);
+    }
+
     const addButton = document.getElementById('generateAddButton');
     const multiplyButton = document.getElementById('generateMultiplyButton');
+    const mixedButton = document.getElementById('generateMixedButton');
 
     // 添加错误处理
     try {
@@ -376,6 +801,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (multiplyButton) {
             multiplyButton.addEventListener('click', displayMultiplyNumber);
+        }
+
+        if (mixedButton) {
+            mixedButton.addEventListener('click', displayMixedNumber);
         }
 
     } catch (error) {
