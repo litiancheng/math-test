@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../assets/images/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg" />
+    <link rel="shortcut icon" href="../assets/images/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/apple-touch-icon.png" />
+    <link rel="manifest" href="../assets/images/site.webmanifest" />
+
+    <meta charset="UTF-8">
+    <meta name="color-scheme" content="light dark">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'self'; 
+        script-src 'self'; 
+        style-src 'self';
+        connect-src 'self' ws://127.0.0.1:* ws://localhost:* wss://127.0.0.1:* wss://localhost:*;
+    ">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>汉字查询 - 小学学习辅助工具</title>
+    <link rel="stylesheet" type="text/css" href="../assets/css/styles.css">
+
+    <!-- 使用外部脚本 -->
+    <script type="module" src="../assets/js/hanzi.js"></script>
+</head>
+
+<body>
+    <!-- 返回按钮 -->
+    <div class="return-button-container">
+        <a href="../index.html" class="return-button">返回主页</a>
+    </div>
+
+    <!-- 主容器 -->
+    <div class="container">
+        <h1>🔍 小学汉字学期查询</h1>
+
+        <!-- 输入区域 -->
+        <div class="form-group">
+            <label for="hanziInput">请输入一个汉字:</label>
+            <input type="text" id="hanziInput" placeholder="输入汉字" maxlength="1" class="hanzi-input">
+            <button id="queryBtn" class="generate-btn">查询学期</button>
+        </div>
+    </div>
+
+    <!-- 结果显示区域 -->
+    <div id="display" class="result-container">
+        <p>请输入一个汉字，点击查询按钮查看该字在小学哪个学期学习</p>
+    </div>
+
+    <footer class="footer">
+        <p>
+            Copyright © 2024-2025 litiancheng. 基于
+            <a href="https://github.com/litiancheng/math-test/blob/main/LICENSE" target="_blank">MIT 许可证</a>
+            发布
+        </p>
+    </footer>
+</body>
+
+</html>

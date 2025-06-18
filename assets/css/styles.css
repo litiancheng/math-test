@@ -224,6 +224,74 @@ select {
     flex-shrink: 0;
 }
 
+/* 汉字查询页面样式 */
+.hanzi-input {
+    font-size: 2rem;
+    text-align: center;
+    width: 120px;
+    height: 60px;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    margin-right: 15px;
+    font-family: inherit;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: border-color 0.2s ease;
+}
+
+.hanzi-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+.query-result {
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px 0;
+    font-size: 1.1rem;
+    text-align: center;
+}
+
+.query-result.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.query-result.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.query-result.not-found {
+    background-color: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeaa7;
+}
+
+/* 暗色模式下的查询结果 */
+@media (prefers-color-scheme: dark) {
+    .query-result.success {
+        background-color: #1e4d2b;
+        color: #a3d9a5;
+        border-color: #2d5a32;
+    }
+
+    .query-result.error {
+        background-color: #4d1e24;
+        color: #f8b2ba;
+        border-color: #5a2d32;
+    }
+
+    .query-result.not-found {
+        background-color: #4d3e1e;
+        color: #f0d996;
+        border-color: #5a4a2d;
+    }
+}
+
 /* 移动设备适配 */
 @media (max-width: 480px) {
     html {
@@ -247,5 +315,22 @@ select {
 
     #display li {
         margin-bottom: 8px;
+    }
+
+    .hanzi-input {
+        width: 80px;
+        height: 50px;
+        font-size: 1.5rem;
+        margin-right: 10px;
+    }
+
+    .form-group {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .form-group .generate-btn {
+        width: 150px;
     }
 }
